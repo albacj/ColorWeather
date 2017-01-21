@@ -1,5 +1,6 @@
 package com.example.alba.colorweatherproyect;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,7 +24,10 @@ public class MainActivity extends AppCompatActivity {
         dailyWeatherTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "click en daily Text View");
+
+                Intent dailyActivityIntent = new Intent(MainActivity.this, DailyWeatherActivity.class);
+                startActivity(dailyActivityIntent);
+
             }
         });
     }
