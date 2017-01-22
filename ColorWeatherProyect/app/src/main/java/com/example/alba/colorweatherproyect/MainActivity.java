@@ -1,6 +1,7 @@
 package com.example.alba.colorweatherproyect;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import butterknife.BindDrawable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -22,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.highestTemptextView) TextView highestTempTextView;
     @BindView(R.id.lowestTemptextView) TextView lowestTempTextView;
 
+    @BindDrawable(R.drawable.clear_night) Drawable clearNight;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -29,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        //iconImageView;
+        iconImageView.setImageDrawable(clearNight);
         descriptionTextView.setText("Sunny Day");
         currentTempTextView.setText("19");
         highestTempTextView.setText("H: 25º");
