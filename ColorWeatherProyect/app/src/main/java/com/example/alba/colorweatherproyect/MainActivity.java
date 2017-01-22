@@ -26,11 +26,20 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.dailyWeatherTextView)
     public void dailyWeatherClick(){
-
         Intent dailyActivityIntent = new Intent(MainActivity.this, DailyWeatherActivity.class);
         startActivity(dailyActivityIntent);
+    }
 
+    @OnClick(R.id.hourlyWeatherTextView)
+    public void hourlyWeatherClick(){
+        Intent hourlyActivityIntent = new Intent(MainActivity.this, HourlyWeatherActivity.class);
+        startActivity(hourlyActivityIntent);
+    }
 
+    @OnClick(R.id.minutelyWeatherTextView)
+    public void minutelyWeatherClick(){
+        Intent minutelyActivityIntent = new Intent(MainActivity.this, MinutelyWeatherActivity.class);
+        startActivity(minutelyActivityIntent);
     }
 
 }
