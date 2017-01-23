@@ -1,0 +1,33 @@
+public Drawable getIconDrawableResource(){
+
+        switch (iconImage) {
+            case CLEAR_NIGHT:
+                return clearNight;
+            case CLEAR_DAY:
+                return clearDay;
+            case CLOUDY:
+                return cloudy;
+            case PARTLY_CLOUDY_NIGHT:
+                return cloudyNight;
+            case FOG:
+                return fog;
+            case NA:
+                return na;
+            case PARTLY_CLOUDY_DAY:
+                return partlyCloudy;
+            case RAIN:
+                return rain;
+            case SLEET:
+                return sleet;
+            case SNOW:
+                return snow;
+            case SUNNY:
+                return sunny;
+            case WIND:
+                return wind;
+            default:
+                return na;
+
+        }
+
+    }
