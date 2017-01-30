@@ -47,24 +47,41 @@ public class DailyWeatherAdapter extends BaseAdapter{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) { //Como vamos a rendear la vista y a mapear los datos
 
+        ViewHolder viewHolder;
         Day day = days.get(position);
 
         if(convertView == null){ //Si la vista es null, la creamos
 
-            Log.d(TAG, "Construyendo una nueva vista desde cero");
+            Log.d(TAG, "Creando y buscando vistas");
+
             convertView = LayoutInflater.from(context).inflate(R.layout.daily_list_item, parent, false);
+
+            viewHolder = new ViewHolder();
+            viewHolder.dayTitle = (TextView) convertView.findViewById(R.id.dailyListTitle);
+            viewHolder.dayDescription = (TextView) convertView.findViewById(R.id.dailyListDescription);
+            viewHolder.dayRainProbability = (TextView) convertView.findViewById(R.id.dailyListProbability);
+
+            convertView.setTag(viewHolder);
+
+        }else{
+
+            viewHolder = (ViewHolder) convertView.getTag();
 
         }
 
-        TextView dayTitle = (TextView) convertView.findViewById(R.id.dailyListTitle);
-        TextView dayDescription = (TextView) convertView.findViewById(R.id.dailyListDescription);
-        TextView dayRainProbability = (TextView) convertView.findViewById(R.id.dailyListProbability);
-
-        dayTitle.setText(day.getDayName());
-        dayDescription.setText(day.getWeatherDescription());
-        dayRainProbability.setText(day.getRainProbability());
+        viewHolder.dayTitle.setText(day.getDayName());
+        viewHolder.dayDescription.setText(day.getWeatherDescription());
+        viewHolder.dayRainProbability.setText(day.getRainProbability());
 
         return convertView;
+    }
+
+    static class ViewHolder{
+
+        TextView dayTitle;
+        TextView dayDescription;
+        TextView dayRainProbability;
+
     }
 
 }
