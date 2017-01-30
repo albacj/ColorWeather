@@ -10,7 +10,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.alba.colorweatherproyect.DailyWeatherActivity"
-    android:background="#00D2FF">
+    android:background="@drawable/bg_gradient_blue">
 
     <TextView
         style="@style/mainFont"

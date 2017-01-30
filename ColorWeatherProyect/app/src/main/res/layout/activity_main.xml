@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.alba.colorweatherproyect.MainActivity"
-    android:background="#00D2FF">
+    android:background="@drawable/bg_gradient_blue">
 
     <ImageView
         android:layout_width="wrap_content"
