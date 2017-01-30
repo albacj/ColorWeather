@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
 
-        String url ="https://api.darksky.net/forecast/555f4b7ea7d6d56e50b3edb687f9034f/37.8267,-122.4233";
+        String url ="https://api.darksky.net/forecast/555f4b7ea7d6d56e50b3edb687f9034f/37.8267,-122.4233?units=si";
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
