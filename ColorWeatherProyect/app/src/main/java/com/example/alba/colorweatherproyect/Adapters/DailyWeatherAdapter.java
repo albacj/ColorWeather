@@ -1,6 +1,7 @@
 package com.example.alba.colorweatherproyect.Adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,8 @@ import java.util.ArrayList;
  */
 
 public class DailyWeatherAdapter extends BaseAdapter{
+
+    public static final String TAG = DailyWeatherAdapter.class.getSimpleName();
 
     ArrayList<Day> days;
     Context context;
@@ -46,7 +49,12 @@ public class DailyWeatherAdapter extends BaseAdapter{
 
         Day day = days.get(position);
 
-        convertView = LayoutInflater.from(context).inflate(R.layout.daily_list_item, null);
+        if(convertView == null){ //Si la vista es null, la creamos
+
+            Log.d(TAG, "Construyendo una nueva vista desde cero");
+            convertView = LayoutInflater.from(context).inflate(R.layout.daily_list_item, parent, false);
+
+        }
 
         TextView dayTitle = (TextView) convertView.findViewById(R.id.dailyListTitle);
         TextView dayDescription = (TextView) convertView.findViewById(R.id.dailyListDescription);
