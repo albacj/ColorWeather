@@ -1,13 +1,29 @@
 package com.example.alba.colorweatherproyect;
 
 import android.app.Activity;
+import android.app.ListActivity;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 
-public class DailyWeatherActivity extends Activity {
+import java.util.ArrayList;
+
+public class DailyWeatherActivity extends ListActivity { //ListActivity ayuda a trabajar con listViews
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daily_weather);
+
+        ArrayList<String> daysArray = new ArrayList<String>();
+        daysArray.add("Lunes");
+        daysArray.add("Martes");
+        daysArray.add("Miércoles");
+        daysArray.add("Jueves");
+        daysArray.add("Viernes");
+        daysArray.add("Sábado");
+        daysArray.add("Domingo");
+
+        ArrayAdapter<String> daysAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,daysArray);
+        setListAdapter(daysAdapter);
     }
 }
