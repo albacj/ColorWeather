@@ -40,7 +40,6 @@ public class MinutelyWeatherActivity extends Activity {
         minute4.setTitle("19:58");
         minute4.setRainProbability("99%");
 
-
         minutes.add(minute);
         minutes.add(minute2);
         minutes.add(minute3);
