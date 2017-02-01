@@ -153,15 +153,15 @@ public class MainActivity extends AppCompatActivity {
 
         JSONArray jsonWithDailyWeatherData = jsonWithDailyWeather.getJSONArray("data");
 
-        for(int i = 0; i <= jsonWithDailyWeatherData.length(); i++){ // Devuelve e numero de elementos
+        for(int i = 0; i < jsonWithDailyWeatherData.length(); i++){ // Devuelve e numero de elementos
 
             Day day = new Day();
 
             JSONObject jsonWithDayData = jsonWithDailyWeatherData.getJSONObject(i);
 
-            String rainProbability = jsonWithDayData.getLong("precipProbability") + "";
+            String rainProbability = jsonWithDayData.getDouble("precipProbability") + "";
             String description = jsonWithDayData.getString("summary");
-            String dayName = dateFormat.format(jsonWithDayData.getLong("time")*1000); // Pasar de ms a s
+            String dayName = dateFormat.format(jsonWithDayData.getDouble("time")*1000); // Pasar de ms a s
 
             day.setDayName(dayName);
             day.setRainProbability(rainProbability);
@@ -172,6 +172,37 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return days;
+
+    }
+
+    public ArrayList<Hour> getHourlyWeather(String json) throws JSONException{
+
+        DateFormat dateFormat = new SimpleDateFormat("HH:mm");
+
+        ArrayList<Hour> hours = new ArrayList<Hour>();
+
+        JSONObject jsonObject = new JSONObject(json);
+        JSONObject jsonWithHourlyWeather = jsonObject.getJSONObject("hourly");
+
+        JSONArray jsonWithHourlyWeatherData = jsonWithHourlyWeather.getJSONArray("data");
+
+        for(int i = 0; i < jsonWithHourlyWeatherData.length(); i++){
+
+            Hour hour = new Hour();
+
+            JSONObject jsonWithHourData = jsonWithHourlyWeatherData.getJSONObject(i);
+
+            String title = dateFormat.format(jsonWithHourData.getDouble("time")*1000);
+            String description = jsonWithHourData.getString("summary");
+
+            hour.setTitle(title);
+            hour.setWeatherDescription(description);
+
+            hours.add(hour);
+
+        }
+
+        return hours;
 
     }
 
