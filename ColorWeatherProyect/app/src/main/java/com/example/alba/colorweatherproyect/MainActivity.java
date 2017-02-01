@@ -20,6 +20,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+
 import butterknife.BindDrawable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -58,6 +63,14 @@ public class MainActivity extends AppCompatActivity {
                 try {
 
                     CurrentWeather currentWeather = getCurrentWeatherFromJSON(response);
+
+                    ArrayList<Day> days = getDailyWeatherFromJson(response);
+
+                    for (Day day : days) {
+                        Log.d(TAG, day.getDayName());
+                        Log.d(TAG, day.getWeatherDescription());
+                        Log.d(TAG, day.getRainProbability());
+                    }
 
                     iconImageView.setImageDrawable(currentWeather.getIconDrawableResource());
                     descriptionTextView.setText(currentWeather.getDescription());
@@ -126,6 +139,39 @@ public class MainActivity extends AppCompatActivity {
         currentWeather.setLowestTemperature(minTemperature);
 
         return currentWeather;
+
+    }
+
+    private ArrayList<Day> getDailyWeatherFromJson(String json)throws JSONException{
+
+        DateFormat dateFormat = new SimpleDateFormat("EEEE");
+
+        ArrayList<Day> days = new ArrayList<Day>();
+
+        JSONObject jsonObject = new JSONObject(json);
+        JSONObject jsonWithDailyWeather = jsonObject.getJSONObject("daily");
+
+        JSONArray jsonWithDailyWeatherData = jsonWithDailyWeather.getJSONArray("data");
+
+        for(int i = 0; i <= jsonWithDailyWeatherData.length(); i++){ // Devuelve e numero de elementos
+
+            Day day = new Day();
+
+            JSONObject jsonWithDayData = jsonWithDailyWeatherData.getJSONObject(i);
+
+            String rainProbability = jsonWithDayData.getLong("precipProbability") + "";
+            String description = jsonWithDayData.getString("summary");
+            String dayName = dateFormat.format(jsonWithDayData.getLong("time")*1000); // Pasar de ms a s
+
+            day.setDayName(dayName);
+            day.setRainProbability(rainProbability);
+            day.setWeatherDescription(description);
+
+            days.add(day);
+
+        }
+
+        return days;
 
     }
 
