@@ -5,7 +5,6 @@ import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,7 +22,7 @@ import org.json.JSONObject;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.TimeZone;
 
 import butterknife.BindDrawable;
 import butterknife.BindView;
@@ -65,11 +64,11 @@ public class MainActivity extends AppCompatActivity {
                     CurrentWeather currentWeather = getCurrentWeatherFromJSON(response);
 
                     ArrayList<Day> days = getDailyWeatherFromJson(response);
+                    ArrayList<Hour> hours = getHourlyWeatherFromJson(response);
 
-                    for (Day day : days) {
-                        Log.d(TAG, day.getDayName());
-                        Log.d(TAG, day.getWeatherDescription());
-                        Log.d(TAG, day.getRainProbability());
+                    for (Hour hour : hours) {
+                        Log.d(TAG, hour.getTitle());
+                        Log.d(TAG, hour.getWeatherDescription());
                     }
 
                     iconImageView.setImageDrawable(currentWeather.getIconDrawableResource());
@@ -175,9 +174,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public ArrayList<Hour> getHourlyWeather(String json) throws JSONException{
+    public ArrayList<Hour> getHourlyWeatherFromJson(String json) throws JSONException{
 
         DateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        dateFormat.setTimeZone(TimeZone.getTimeZone("America/Los_Angeles"));
 
         ArrayList<Hour> hours = new ArrayList<Hour>();
 
