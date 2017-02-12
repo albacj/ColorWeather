@@ -12,7 +12,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/clear_day"
+        app:srcCompat="@drawable/na"
         android:id="@+id/iconImageView"
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
@@ -24,7 +24,7 @@
 
     <TextView
         style="@style/mainFont"
-        android:text="Partly Cloudy"
+        android:text="--"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/descriptionTextView"
@@ -35,7 +35,7 @@
 
     <TextView
         style="@style/mainFont"
-        android:text="19"
+        android:text="--"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/currentTempTextView"
@@ -56,7 +56,7 @@
 
     <TextView
         style="@style/mainFont"
-        android:text="H: 19º"
+        android:text="H: --º"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/highestTemptextView"
@@ -68,7 +68,7 @@
 
     <TextView
         style="@style/mainFont"
-        android:text="L: 12º"
+        android:text="L: --º"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/lowestTemptextView"
