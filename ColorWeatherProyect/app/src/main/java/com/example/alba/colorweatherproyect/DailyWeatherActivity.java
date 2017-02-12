@@ -3,6 +3,7 @@ package com.example.alba.colorweatherproyect;
 import android.app.Activity;
 import android.app.ListActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 
 import com.example.alba.colorweatherproyect.Adapters.DailyWeatherAdapter;
@@ -10,6 +11,8 @@ import com.example.alba.colorweatherproyect.Adapters.DailyWeatherAdapter;
 import java.util.ArrayList;
 
 public class DailyWeatherActivity extends ListActivity { //ListActivity ayuda a trabajar con listViews
+
+    public static final String TAG = DailyWeatherActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +31,6 @@ public class DailyWeatherActivity extends ListActivity { //ListActivity ayuda a 
             days.add(day);
 
         }
-
-
 
         DailyWeatherAdapter dailyWeatherAdapter = new DailyWeatherAdapter(this,days);
 

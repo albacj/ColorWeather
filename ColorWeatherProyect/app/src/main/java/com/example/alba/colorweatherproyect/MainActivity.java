@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String DAILY = "daily";
     public static final String HOURLY = "hourly";
     public static final String MINUTELY = "minutely";
+    public static final String TIMEZONE = "timezone";
 
     @BindView(R.id.iconImageView) ImageView iconImageView;
     @BindView(R.id.descriptionTextView) TextView descriptionTextView;
@@ -79,11 +80,6 @@ public class MainActivity extends AppCompatActivity {
                     ArrayList<Hour> hours = getHourlyWeatherFromJson(response);
                     ArrayList<Minute> minutes = getMinutelyWeatherFromJson(response);
 
-                    for (Minute minute : minutes) {
-                        Log.d(TAG, minute.getTitle());
-                        Log.d(TAG, minute.getRainProbability());
-                    }
-
                     iconImageView.setImageDrawable(currentWeather.getIconDrawableResource());
                     descriptionTextView.setText(currentWeather.getDescription());
                     currentTempTextView.setText(currentWeather.getCurrentTemperature());
@@ -110,7 +106,9 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.dailyWeatherTextView)
     public void dailyWeatherClick(){
+
         Intent dailyActivityIntent = new Intent(MainActivity.this, DailyWeatherActivity.class);
+
         startActivity(dailyActivityIntent);
     }
 
@@ -161,6 +159,10 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<Day> days = new ArrayList<Day>();
 
         JSONObject jsonObject = new JSONObject(json);
+
+        String timeZone = jsonObject.getString(TIMEZONE);
+        dateFormat.setTimeZone(TimeZone.getTimeZone(timeZone));
+
         JSONObject jsonWithDailyWeather = jsonObject.getJSONObject(DAILY);
 
         JSONArray jsonWithDailyWeatherData = jsonWithDailyWeather.getJSONArray(DATA);
@@ -190,11 +192,14 @@ public class MainActivity extends AppCompatActivity {
     public ArrayList<Hour> getHourlyWeatherFromJson(String json) throws JSONException{
 
         DateFormat dateFormat = new SimpleDateFormat("HH:mm");
-        dateFormat.setTimeZone(TimeZone.getTimeZone("America/Los_Angeles"));
 
         ArrayList<Hour> hours = new ArrayList<Hour>();
 
         JSONObject jsonObject = new JSONObject(json);
+
+        String timeZone = jsonObject.getString(TIMEZONE);
+        dateFormat.setTimeZone(TimeZone.getTimeZone(timeZone));
+
         JSONObject jsonWithHourlyWeather = jsonObject.getJSONObject(HOURLY);
 
         JSONArray jsonWithHourlyWeatherData = jsonWithHourlyWeather.getJSONArray(DATA);
@@ -222,11 +227,14 @@ public class MainActivity extends AppCompatActivity {
     public ArrayList<Minute> getMinutelyWeatherFromJson(String json) throws JSONException{
 
         DateFormat dateFormat = new SimpleDateFormat("HH:mm");
-        dateFormat.setTimeZone(TimeZone.getTimeZone("America/Los_Angeles"));
 
         ArrayList<Minute> minutes = new ArrayList<Minute>();
 
         JSONObject jsonObject = new JSONObject(json);
+
+        String timeZone = jsonObject.getString(TIMEZONE);
+        dateFormat.setTimeZone(TimeZone.getTimeZone(timeZone));
+
         JSONObject jsonWithMinutelyWeather = jsonObject.getJSONObject(MINUTELY);
 
         JSONArray jsonWithMinutelyWeatherData = jsonWithMinutelyWeather.getJSONArray(DATA);
