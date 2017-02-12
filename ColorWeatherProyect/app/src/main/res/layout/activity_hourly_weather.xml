@@ -26,5 +26,8 @@
         android:id="@+id/hourlyWeatherTitleTextView"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:textStyle="normal|bold" />
+        android:textStyle="normal|bold"
+        android:divider="@null"
+        android:dividerHeight="10dp"
+        android:layout_margin="5dp"/>
 </RelativeLayout>
