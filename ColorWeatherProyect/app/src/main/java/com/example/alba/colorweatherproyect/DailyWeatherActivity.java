@@ -1,10 +1,8 @@
 package com.example.alba.colorweatherproyect;
 
-import android.app.Activity;
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.ArrayAdapter;
 
 import com.example.alba.colorweatherproyect.Adapters.DailyWeatherAdapter;
 
@@ -19,18 +17,9 @@ public class DailyWeatherActivity extends ListActivity { //ListActivity ayuda a 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daily_weather);
 
-        ArrayList<Day> days = new ArrayList<Day>();
+        Intent intent = getIntent();
 
-        for(int i = 0; i < 500; i++){
-
-            Day day = new Day();
-            day.setDayName("Monday");
-            day.setWeatherDescription("It is going to rain");
-            day.setRainProbability("Rain probability: 99%");
-
-            days.add(day);
-
-        }
+        ArrayList<Day> days = intent.getParcelableArrayListExtra(MainActivity.DAYS_ARRAY_LIST);
 
         DailyWeatherAdapter dailyWeatherAdapter = new DailyWeatherAdapter(this,days);
 

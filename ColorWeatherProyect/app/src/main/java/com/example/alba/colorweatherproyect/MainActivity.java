@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String HOURLY = "hourly";
     public static final String MINUTELY = "minutely";
     public static final String TIMEZONE = "timezone";
+    public static final String DAYS_ARRAY_LIST = "DAYS_ARRAY_LIST";
 
     @BindView(R.id.iconImageView) ImageView iconImageView;
     @BindView(R.id.descriptionTextView) TextView descriptionTextView;
@@ -110,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
     public void dailyWeatherClick(){
 
         Intent dailyActivityIntent = new Intent(MainActivity.this, DailyWeatherActivity.class);
-        dailyActivityIntent.putParcelableArrayListExtra("days", days);
+        dailyActivityIntent.putParcelableArrayListExtra(DAYS_ARRAY_LIST, days);
 
         startActivity(dailyActivityIntent);
     }
@@ -176,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
 
             JSONObject jsonWithDayData = jsonWithDailyWeatherData.getJSONObject(i);
 
-            String rainProbability = jsonWithDayData.getDouble(PRECIP_PROBABILITY) + "";
+            String rainProbability = "Rain probability: " + jsonWithDayData.getDouble(PRECIP_PROBABILITY)*100 + "%";
             String description = jsonWithDayData.getString(SUMMARY);
             String dayName = dateFormat.format(jsonWithDayData.getDouble(TIME)*1000); // Pasar de ms a s
 
