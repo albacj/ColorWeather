@@ -1,6 +1,7 @@
 package com.example.alba.colorweatherproyect;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ListView;
 
@@ -22,17 +23,9 @@ public class HourlyWeatherActivity extends Activity {
         setContentView(R.layout.activity_hourly_weather);
         ButterKnife.bind(this);
 
-        Hour hour = new Hour();
-        hour.setTitle("11:00 pm");
-        hour.setWeatherDescription("There is a storm");
+        Intent intent = getIntent();
 
-        Hour hour2 = new Hour();
-        hour2.setTitle("12:00 pm");
-        hour2.setWeatherDescription("There is a storm");
-
-        ArrayList<Hour> hours = new ArrayList<Hour>();
-        hours.add(hour);
-        hours.add(hour2);
+        ArrayList<Hour> hours = intent.getParcelableArrayListExtra(MainActivity.HOUR_ARRAY_LIST);
 
         HourlyWeatherAdapter hourlyWeatherAdapter = new HourlyWeatherAdapter(this, hours);
 

@@ -13,7 +13,7 @@ public class Hour implements Parcelable{
     private String weatherDescription;
 
     public Hour(){
-        
+
     }
 
     protected Hour(Parcel in) {

@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String MINUTELY = "minutely";
     public static final String TIMEZONE = "timezone";
     public static final String DAYS_ARRAY_LIST = "DAYS_ARRAY_LIST";
+    public static final String HOUR_ARRAY_LIST = "HOUR_ARRAY_LIST";
 
     @BindView(R.id.iconImageView) ImageView iconImageView;
     @BindView(R.id.descriptionTextView) TextView descriptionTextView;
@@ -56,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
     @BindDrawable(R.drawable.clear_night) Drawable clearNight;
 
     ArrayList<Day> days;
+    ArrayList<Hour> hours;
+    ArrayList<Minute> minutes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,8 +83,8 @@ public class MainActivity extends AppCompatActivity {
                     CurrentWeather currentWeather = getCurrentWeatherFromJSON(response);
 
                     days = getDailyWeatherFromJson(response);
-                    ArrayList<Hour> hours = getHourlyWeatherFromJson(response);
-                    ArrayList<Minute> minutes = getMinutelyWeatherFromJson(response);
+                    hours = getHourlyWeatherFromJson(response);
+                    minutes = getMinutelyWeatherFromJson(response);
 
                     iconImageView.setImageDrawable(currentWeather.getIconDrawableResource());
                     descriptionTextView.setText(currentWeather.getDescription());
@@ -118,12 +121,16 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.hourlyWeatherTextView)
     public void hourlyWeatherClick(){
+
         Intent hourlyActivityIntent = new Intent(MainActivity.this, HourlyWeatherActivity.class);
+        hourlyActivityIntent.putParcelableArrayListExtra(HOUR_ARRAY_LIST, hours);
+
         startActivity(hourlyActivityIntent);
     }
 
     @OnClick(R.id.minutelyWeatherTextView)
     public void minutelyWeatherClick(){
+
         Intent minutelyActivityIntent = new Intent(MainActivity.this, MinutelyWeatherActivity.class);
         startActivity(minutelyActivityIntent);
     }
@@ -145,7 +152,6 @@ public class MainActivity extends AppCompatActivity {
         String minTemperature = Math.round(jsonWithTodayData.getDouble(TEMPERATURE_MIN)) + "";
 
         CurrentWeather currentWeather = new CurrentWeather(MainActivity.this);
-
         currentWeather.setDescription(summary);
         currentWeather.setIconImage(icon);
         currentWeather.setCurrentTemperature(temperature);
