@@ -54,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
 
     @BindDrawable(R.drawable.clear_night) Drawable clearNight;
 
+    ArrayList<Day> days;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -76,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
                     CurrentWeather currentWeather = getCurrentWeatherFromJSON(response);
 
-                    ArrayList<Day> days = getDailyWeatherFromJson(response);
+                    days = getDailyWeatherFromJson(response);
                     ArrayList<Hour> hours = getHourlyWeatherFromJson(response);
                     ArrayList<Minute> minutes = getMinutelyWeatherFromJson(response);
 
@@ -108,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
     public void dailyWeatherClick(){
 
         Intent dailyActivityIntent = new Intent(MainActivity.this, DailyWeatherActivity.class);
+        dailyActivityIntent.putParcelableArrayListExtra("days", days);
 
         startActivity(dailyActivityIntent);
     }
