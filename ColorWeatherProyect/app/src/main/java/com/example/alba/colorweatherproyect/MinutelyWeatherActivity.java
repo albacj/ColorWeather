@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.TextView;
 
 import com.example.alba.colorweatherproyect.Adapters.MinutelyWeatherAdapter;
 
@@ -16,6 +18,7 @@ import butterknife.ButterKnife;
 public class MinutelyWeatherActivity extends Activity {
 
     @BindView(R.id.minutelyRecyclerView) RecyclerView minutelyRecyclerView;
+    @BindView(R.id.minutelyNoDataTextView) TextView noDataTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,15 +30,28 @@ public class MinutelyWeatherActivity extends Activity {
 
         ArrayList<Minute> minutes = intent.getParcelableArrayListExtra(MainActivity.MINUTE_ARRAY_LIST);
 
-        MinutelyWeatherAdapter minutelyWeatherAdapter = new MinutelyWeatherAdapter(this, minutes);
+        if(minutes != null && !minutes.isEmpty()){
 
-        minutelyRecyclerView.setAdapter(minutelyWeatherAdapter);
+            noDataTextView.setVisibility(View.GONE);
+            minutelyRecyclerView.setVisibility(View.VISIBLE);
 
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+            MinutelyWeatherAdapter minutelyWeatherAdapter = new MinutelyWeatherAdapter(this, minutes);
 
-        minutelyRecyclerView.setLayoutManager(layoutManager);
+            minutelyRecyclerView.setAdapter(minutelyWeatherAdapter);
 
-        minutelyRecyclerView.setHasFixedSize(true); // Los elementos son de un tamaño especifico
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
 
+            minutelyRecyclerView.setLayoutManager(layoutManager);
+            minutelyRecyclerView.setHasFixedSize(true); // Los elementos son de un tamaño especifico
+
+        }else{
+
+            //Desplegar noDataTextView
+            //Volver recyclerView invisible
+
+            noDataTextView.setVisibility(View.VISIBLE);
+            minutelyRecyclerView.setVisibility(View.GONE);
+
+        }
     }
 }
