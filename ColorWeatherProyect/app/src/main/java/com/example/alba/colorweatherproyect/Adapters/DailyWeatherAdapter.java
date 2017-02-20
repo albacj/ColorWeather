@@ -31,7 +31,12 @@ public class DailyWeatherAdapter extends BaseAdapter{
 
     @Override
     public int getCount() { // cuántos elementos hay en nuestros datos
-        return days.size();
+
+        if(days == null){
+            return 0;
+        }else{
+            return days.size();
+        }
     }
 
     @Override
